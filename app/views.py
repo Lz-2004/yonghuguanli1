@@ -1,3 +1,5 @@
+from http.client import responses
+
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
@@ -19,17 +21,25 @@ def login(request):
     return render(request, "login.html", {"error_message": error_message})
 
 USER_LIST = [
-    {'username':'zhangsan', 'age':'23', 'gender':'male'},
+    {'id':0, 'username':'zhangsan', 'age':'23', 'gender':'male', 'email':'289460@qq.com'},
 ]
 
 for i in range(1,10):
-    temp = {'username':'zhangsan', 'age':'23', 'gender':'male'}
+    temp = {'id':i,'username':'zhangsan'+str(i), 'age':'23', 'gender':'male', 'email':'289460'+str(i)+'@qq.com'}
     USER_LIST.append(temp)
 def home(request):
     if request.method == "POST":
         username = request.POST.get('username')
         age = request.POST.get('age')
         gender = request.POST.get('gender')
-        temp = {'username':username, 'age':age, 'gender':gender}
-        USER_LIST.append(temp)
+        temp_1 = {'username':username, 'age':age, 'gender':gender}
+        USER_LIST.append(temp_1)
     return render(request,'home.html' ,{'user_list':USER_LIST})
+
+
+def son(request,id):
+    #id = request.GET.get('id')
+
+    if id:
+        user_info = USER_LIST[int(id)]
+    return render(request,'son.html', {'user_info':user_info})

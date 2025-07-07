@@ -20,6 +20,7 @@
         </form>
         <table class="table table-bordered">
             <tr>
+                <td>id</td>
                 <td>username</td>
                 <td>age</td>
                 <td>gender</td>
@@ -27,6 +28,8 @@
 
             {% for row in user_list %}
             <tr>
+                <td> <a href="/son-{{ row.id }}.html/" target="_blank">{{ row.id }}</a></td>
+{#                zhegeui#}
                 <td>{{ row.username }}</td>
                 <td>{{ row.age }}</td>
                 <td>{{ row.gender }}</td>
